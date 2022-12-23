@@ -1,0 +1,42 @@
+var gamePattern = [];
+var randomNumberArray = ["red", "blue", "green", "yellow"];
+var userChosenPattern = [];
+var level=0;
+var started= false;
+
+$(document).on("keypress", function(){
+  if(!started){
+    $("#level-title").text("Level "+ level);
+nextSequence();
+started=true;
+}
+});
+
+$(".btn").on("click", function() {
+  var userChosenColor = $(this).attr("id");
+  userChosenPattern.push(userChosenColor);
+  playSound(userChosenColor);
+  animatePress(userChosenColor);
+})
+
+function nextSequence() {
+  $("#level-title").text("Level "+ level);
+  var randomNumber = Math.floor((Math.random() * 4));
+  var randomChosencolor = randomNumberArray[randomNumber];
+  gamePattern.push(randomChosencolor);
+  $("#" + randomChosencolor).fadeOut(100).fadeIn(100);
+  playSound(randomChosencolor);
+}
+
+function playSound(audio) {
+  var audio = new Audio("sounds/" + audio + ".mp3");
+  audio.play();
+}
+
+function animatePress(currentColor){
+$("."+currentColor).addClass("pressed");
+setTimeout(function(){
+        $("."+currentColor).removeClass("pressed");
+    }, 100);
+
+}
