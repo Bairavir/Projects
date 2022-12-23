@@ -34,7 +34,7 @@ function nextSequence() {
 }
 
 function playSound(audio) {
-  var audio = new Audio("sounds/" + audio + ".mp3");
+  var audio = new Audio(audio + ".mp3");
   audio.play();
 }
 
